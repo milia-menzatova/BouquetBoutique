@@ -6,16 +6,19 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using BouquetBoutiqueMvc.Models;
+using BouquetBoutiqueLibrary.Manager;
 
 namespace BouquetBoutiqueMvc.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IBouquetManager _bouquetManager;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IBouquetManager bouquetManager)
         {
             _logger = logger;
+            _bouquetManager = bouquetManager;
         }
 
         public IActionResult Index()
