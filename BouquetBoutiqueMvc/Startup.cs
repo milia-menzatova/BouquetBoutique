@@ -9,6 +9,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
+using BouquetBoutiqueLibrary;
+using BouquetBoutiqueLibrary.Manager;
+using BouquetBoutiqueLibrary.Storage;
+
 namespace BouquetBoutiqueMvc
 {
     public class Startup
@@ -24,6 +28,10 @@ namespace BouquetBoutiqueMvc
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            IBouquetStorage bouquetStorage = new BouquetListStorage();
+            IBouquetManager bouquetManager = new DefaultBouquetManager(bouquetStorage);
+            services.AddSingleton<IBouquetManager>(bouquetManager); 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
