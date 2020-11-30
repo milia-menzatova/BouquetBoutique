@@ -11,6 +11,8 @@ namespace BouquetBoutiqueLibrary.Storage
 
         Bouquet FindByName(string bouquetName);
 
+        Bouquet FindById(string bouquetId);
+
         void RemoveBouquet(Bouquet bouquet);
 
         ICollection<Bouquet> GetAll(int fromIndex, int limit);

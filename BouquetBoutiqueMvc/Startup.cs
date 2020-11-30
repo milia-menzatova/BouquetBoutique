@@ -12,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 using BouquetBoutiqueLibrary;
 using BouquetBoutiqueLibrary.Manager;
 using BouquetBoutiqueLibrary.Storage;
+using BouquetBoutiqueMvc.Services;
 
 namespace BouquetBoutiqueMvc
 {
@@ -32,6 +33,11 @@ namespace BouquetBoutiqueMvc
             IBouquetStorage bouquetStorage = new BouquetListStorage();
             IBouquetManager bouquetManager = new DefaultBouquetManager(bouquetStorage);
             services.AddSingleton<IBouquetManager>(bouquetManager); 
+            services.AddSingleton<SessionCartService>(new SessionCartService());
+            services.AddSession(options => 
+            {
+               options.Cookie.Name = "_boquet_boutique_session_id";     
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,6 +62,8 @@ namespace BouquetBoutiqueMvc
 
             app.UseAuthorization();
 
+            app.UseSession();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
@@ -64,4 +72,5 @@ namespace BouquetBoutiqueMvc
             });
         }
     }
+
 }

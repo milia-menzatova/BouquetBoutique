@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using BouquetBoutiqueLibrary.Model;
 
@@ -9,7 +10,7 @@ namespace BouquetBoutiqueLibrary.Storage
 
         public BouquetListStorage()
         {
-            this.bouquets = new List<Bouquet>();
+            this.bouquets = new List<Bouquet>();           
         }
 
 
@@ -30,7 +31,19 @@ namespace BouquetBoutiqueLibrary.Storage
         {
             foreach (var bouquet in this.bouquets)
             {
-                if (bouquetName.Equals(bouquet.name))
+                if (bouquetName.Equals(bouquet.Name))
+                {
+                    return bouquet;
+                }
+            }
+            return null;
+        }
+
+        public Bouquet FindById(string bouquetId) 
+        {
+            foreach (var bouquet in this.bouquets)
+            {
+                if (bouquetId.Equals(bouquet.Id.ToString()))
                 {
                     return bouquet;
                 }

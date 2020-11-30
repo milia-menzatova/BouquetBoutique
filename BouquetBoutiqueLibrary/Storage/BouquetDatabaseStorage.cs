@@ -20,6 +20,11 @@ namespace BouquetBoutiqueLibrary.Storage
             return null;
         }
 
+        public Bouquet FindById(string bouquetId) 
+        {
+            return null;
+        }
+
         public void RemoveBouquet(Bouquet bouquet)
         {
         }

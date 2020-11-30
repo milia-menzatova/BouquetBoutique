@@ -8,22 +8,23 @@ using Microsoft.Extensions.Logging;
 using BouquetBoutiqueMvc.Models;
 using BouquetBoutiqueLibrary.Manager;
 
+using BouquetBoutiqueLibrary.Model;
+
 namespace BouquetBoutiqueMvc.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-        private readonly IBouquetManager _bouquetManager;
+        private readonly IBouquetManager bouquetManager;
 
-        public HomeController(ILogger<HomeController> logger, IBouquetManager bouquetManager)
+        public HomeController(IBouquetManager bouquetManager)
         {
-            _logger = logger;
-            _bouquetManager = bouquetManager;
+            this.bouquetManager = bouquetManager;
         }
 
         public IActionResult Index()
         {
-            return View();
+            ICollection<Bouquet> bouquets = bouquetManager.GetAll();
+            return View(bouquets);
         }
 
         public IActionResult Privacy()
